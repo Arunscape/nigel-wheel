@@ -52,11 +52,6 @@ const Home: NextPage = () => {
       <Container>
         <Card
           component="span"
-          align="center"
-          variant="gradient"
-          gradient={{ from: "indigo", to: "cyan", deg: 45 }}
-          size="xl"
-          weight={700}
           style={{ fontFamily: "Greycliff CF, sans-serif" }}
         >
           {activity}
@@ -65,6 +60,7 @@ const Home: NextPage = () => {
       <Container>
         <Button
           onClick={() => {
+            // @ts-ignore
             setActivity(_.sample(Activities));
           }}
           variant="gradient"

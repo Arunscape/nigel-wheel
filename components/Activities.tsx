@@ -50,15 +50,15 @@ return <BaseActivity>
 
     get a list of people,
 
-    actions are 'grab', 'touch', 'fondle', 'pet', 'pat', 'bodyshot', 'lick', 'kiss', 'choke', 'nibble', 'caress'
+    actions are grab, touch, fondle, pet, pat, bodyshot, lick, kiss, choke, nibble, caress
 
-    body parts are: 'arm', 'face', 'lips', 'shoulder', 'neck', 'bellybutton', 'ass', 'neck', 'cheek', 'leg', 'foot/feet', 'hair', 'finger'
+    body parts are: arm, face, lips, shoulder, neck, bellybutton, ass, neck, cheek, leg, foot/feet, hair, finger
 
 </BaseActivity>}
 
 export const Trivia = () => <BaseActivity>
     Time to answer some questions. Idk we need to decide on rules. Maybe answer until you get 10 right, answer until you get one wrong?
-    <Button>click button for a suggestion if you don't have a trivia question to ask</Button>
+    <Button>click button for a suggestion if you dont have a trivia question to ask</Button>
 </BaseActivity>
 
 export const Butler = () => {
@@ -74,11 +74,11 @@ export const Butler = () => {
 export const Roast = () => <BaseActivity>Everyone take turns roasting this loser</BaseActivity>
 
 
-export const Toast = () => <BaseActivity> Everyone give thiss lovely person a nice complement"</BaseActivity>
+export const Toast = () => <BaseActivity> Everyone give this lovely person a nice complement</BaseActivity>
 
 export const Dare = () => <BaseActivity>As a group decide something for this person to (voluntarily) do</BaseActivity>
 
-export const BlindGuess = () => <BaseActivity>put something in this person's hand and make them guess what it is")</BaseActivity>
+export const BlindGuess = () => <BaseActivity>put something in this persons hand and make them guess what it is</BaseActivity>
 
 export const Clothing = (props: { minus: boolean }) => {
 
@@ -91,7 +91,7 @@ export const Clothing = (props: { minus: boolean }) => {
 
 export const SwapClothing = () => {
 
-    const players = [];
+    const players = ['nigel'];
     const other = _.sample(players) // remember to exclude current player
     const item = _.sample(['pant/dress/skirt/short', 'socks', 'tshirt', 'glasses']);
 
@@ -110,13 +110,13 @@ export const BoysDrink = XDrinks({ gender: "Boys" })
 export const GirlsDrink = XDrinks({ gender: "Girls" })
 export const NonBinaryDrink = XDrinks({ gender: "Nonbinary people" })
 
-export const Rank = () => <BaseActivity>Arbitrarily rank your friends according to some arbitrary criterion. We then havbe to guess what you're ranking by</BaseActivity>
+export const Rank = () => <BaseActivity>Arbitrarily rank your friends according to some arbitrary criterion. We then havbe to guess what youre ranking by</BaseActivity>
 
 export const NeverHaveIEver = () => <BaseActivity>Never have i ever</BaseActivity>
 
-export const Rant = () => <BaseActivity>Rant about anything you'd like</BaseActivity>
+export const Rant = () => <BaseActivity>Rant about anything youd like</BaseActivity>
 
-export const Act = () => <BaseActivity> You've gotta act this out. Press button for suggestion or the group comes up with one</BaseActivity>
+export const Act = () => <BaseActivity> Youve gotta act this out. Press button for suggestion or the group comes up with one</BaseActivity>
 
 export const GiveMeTen = () => <BaseActivity>Give me 10 of something pushups? Ask group for suggestion or pray to RNGesus and hit the button</BaseActivity>
 
@@ -154,7 +154,7 @@ export const TryNotToLaugh = () => <BaseActivity>
 
 
 export const Handcuff = () => <BaseActivity>
-    We gotta tie your hands until it's your next turn, sorry.
+    We gotta tie your hands until its your next turn, sorry.
 </BaseActivity>
 
 // export default Wheel;
