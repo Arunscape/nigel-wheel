@@ -10,6 +10,7 @@ import {
   Text,
   Button,
   Container,
+  Card,
 } from "@mantine/core";
 import { useEffect, useState } from "react";
 import _ from "lodash";
@@ -49,7 +50,7 @@ const Home: NextPage = () => {
       })}
     >
       <Container>
-        <Text
+        <Card
           component="span"
           align="center"
           variant="gradient"
@@ -59,7 +60,7 @@ const Home: NextPage = () => {
           style={{ fontFamily: "Greycliff CF, sans-serif" }}
         >
           {activity}
-        </Text>
+        </Card>
       </Container>
       <Container>
         <Button

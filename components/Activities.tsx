@@ -1,4 +1,4 @@
-import { Button, Card, Text, Card } from "@mantine/core";
+import { Button, Card, Text } from "@mantine/core";
 import _ from 'lodash';
 
 // const wheel = [
@@ -39,7 +39,13 @@ const BaseActivity = (props: any) => <Card style={{color: 'ffffff'}}>
 
 export const Art = () => (<BaseActivity>Draw something, anything! On paper, on anyone, on anything!</BaseActivity>);
 
-export const SexyDice = () => <BaseActivity>
+export const SexyDice = () => {
+
+    const actions = [];
+    const people = [];
+    const bodyparts = [];
+
+return <BaseActivity>
     <div>uWu</div>
 
     get a list of people,
@@ -48,7 +54,7 @@ export const SexyDice = () => <BaseActivity>
 
     body parts are: 'arm', 'face', 'lips', 'shoulder', 'neck', 'bellybutton', 'ass', 'neck', 'cheek', 'leg', 'foot/feet', 'hair', 'finger'
 
-</BaseActivity>
+</BaseActivity>}
 
 export const Trivia = () => <BaseActivity>
     Time to answer some questions. Idk we need to decide on rules. Maybe answer until you get 10 right, answer until you get one wrong?
