@@ -32,29 +32,41 @@ import _ from 'lodash';
 //     'handcuff',
 //   ];
 
-const BaseActivity = (props: any) => <Card style={{color: 'ffffff'}}>
+const BaseActivity = (props: any) => <Card style={{ color: 'ffffff' }}>
     {props.children}
 </Card>
 
 
-export const Art = () => (<BaseActivity>Draw something, anything! On paper, on anyone, on anything!</BaseActivity>);
+export const Art = (props: ActivityProps) => {
+
+    console.log("art component: ", props.players);
+
+    return <BaseActivity>
+        <Text>
+            Draw something, anything! On paper, on anyone, on anything!
+        </Text>
+        {props.players}
+
+    </BaseActivity>
+};
 
 export const SexyDice = () => {
 
-    const actions = [];
-    const people = [];
-    const bodyparts = [];
+    const actions = ["Grab", "Touch", "Fondle", "Pet", "Pat", "Bodyshot", "Lick", "Kiss", "Choke", "Nibble", "Caress", "Blow", "Eat food"];
+    const people = [""];
+    const bodyparts = ["arm", "face", "lips", "shoulder", "neck", "bellybutton", "crotch", "ass", "neck", "cheek", "leg", "feet", "hair", "finger"];
 
-return <BaseActivity>
-    <div>uWu</div>
+    return <BaseActivity>
+        <div>uWu</div>
 
-    get a list of people,
+        Sexy Dice! {actions} on {people}'s {bodyparts}.
 
-    actions are grab, touch, fondle, pet, pat, bodyshot, lick, kiss, choke, nibble, caress
+        {/* actions are grab, touch, fondle, pet, pat, bodyshot, lick, kiss, choke, nibble, caress
 
-    body parts are: arm, face, lips, shoulder, neck, bellybutton, ass, neck, cheek, leg, foot/feet, hair, finger
+    body parts are: arm, face, lips, shoulder, neck, bellybutton, ass, neck, cheek, leg, foot/feet, hair, finger */}
 
-</BaseActivity>}
+    </BaseActivity>
+}
 
 export const Trivia = () => <BaseActivity>
     Time to answer some questions. Idk we need to decide on rules. Maybe answer until you get 10 right, answer until you get one wrong?
@@ -91,18 +103,19 @@ export const Clothing = (props: { minus: boolean }) => {
 
 export const SwapClothing = () => {
 
-    const players = ['nigel'];
+    const players = [""];
     const other = _.sample(players) // remember to exclude current player
     const item = _.sample(['pant/dress/skirt/short', 'socks', 'tshirt', 'glasses']);
 
     return <BaseActivity>
-        swap {item} with {other}
+        Swap {item} with {other}
     </BaseActivity>
 };
 
-const XDrinks = (props: { gender: string }) => {
+const XDrinks = (props) => {
+    const gender = "apache attack helicopter"
     return <BaseActivity>
-        {props.gender} drink!
+        {gender} drink!
     </BaseActivity>
 }
 
@@ -158,3 +171,32 @@ export const Handcuff = () => <BaseActivity>
 </BaseActivity>
 
 // export default Wheel;
+// 
+// 
+export interface ActivityProps {
+    players: string[];
+}
+const Activities = [
+    (props: ActivityProps) => <Art {...props} />,
+    (props: ActivityProps) => <Butler {...props} />,
+    (props: ActivityProps) => <Trivia {...props} />,
+    (props: ActivityProps) => <Toast {...props} />,
+    (props: ActivityProps) => <Roast {...props} />,
+    (props: ActivityProps) => <Dare {...props} />,
+    (props: ActivityProps) => <BlindGuess {...props} />,
+    (props: ActivityProps) => <Clothing {...props} />,
+    (props: ActivityProps) => <SwapClothing {...props} />,
+    (props: ActivityProps) => <XDrinks {...props} />,
+    (props: ActivityProps) => <Rank {...props} />,
+    (props: ActivityProps) => <NeverHaveIEver {...props} />,
+    (props: ActivityProps) => <Rant {...props} />,
+    (props: ActivityProps) => <Act {...props} />,
+    (props: ActivityProps) => <GiveMeTen {...props} />,
+    (props: ActivityProps) => <Category {...props} />,
+    (props: ActivityProps) => <Truth {...props} />,
+    (props: ActivityProps) => <SexyDice {...props} />,
+    (props: ActivityProps) => <Karaoke {...props} />,
+    (props: ActivityProps) => <TryNotToLaugh {...props} />,
+    (props: ActivityProps) => <Handcuff {...props} />,
+]
+export default Activities;
