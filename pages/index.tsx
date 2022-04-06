@@ -19,6 +19,9 @@ import Activities, {ActivityProps} from '../components/Activities';
 
 
 // Ability to remove a player from the list
+// Change the order of players in the list (dragging?)
+// Hitting spin highlights the next player in the list
+// Add a weighting to the activities, based on how lewd they are. A slider can control how often lewd ones come up
 
 
 
