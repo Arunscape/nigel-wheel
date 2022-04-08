@@ -56,7 +56,7 @@ export const SexyDice = (props: any) => {
     return <BaseActivity>
         <div>uWu</div>
 
-        Sexy Dice! {actionsRandNum} on {otherplayer}'s {bodypartsRandNum}.
+        Sexy Dice! {actions[actionsRandNum]} on {otherplayer}'s {bodyparts[bodypartsRandNum]}.
 
         {/* actions are grab, touch, fondle, pet, pat, bodyshot, lick, kiss, choke, nibble, caress
 
@@ -84,7 +84,13 @@ export const Butler = (props: any) => {
 
 // export const BeerPong = () => <BaseActivity> does it make sense to have this one? </BaseActivity>
 
-export const Roast = () => <BaseActivity>Everyone take turns roasting this loser</BaseActivity>
+export const Roast = (props: any) => {
+
+    const [players, activeplayer] = props
+
+    return <BaseActivity>Everyone take turns roasting {players[activeplayer]}</BaseActivity>
+
+}
 
 
 export const Toast = () => <BaseActivity> Everyone give this lovely person a nice complement</BaseActivity>
