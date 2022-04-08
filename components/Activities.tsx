@@ -48,7 +48,7 @@ export const Art = () => {
 };
 
 export const SexyDice = (props: any) => {
-    
+    const { otherplayer } = props
     const actions = ["Grab", "Touch", "Fondle", "Pet", "Pat", "Bodyshot", "Lick", "Kiss", "Choke", "Nibble", "Caress", "Blow", "Eat food"];
     const bodyparts = ["arm", "face", "lips", "shoulder", "neck", "bellybutton", "crotch", "ass", "neck", "cheek", "leg", "feet", "hair", "finger"];
     const actionsRandNum = Math.floor(Math.random() * actions.length);
@@ -56,7 +56,7 @@ export const SexyDice = (props: any) => {
     return <BaseActivity>
         <div>uWu</div>
 
-        Sexy Dice! {actionsRandNum} on {people}'s {bodypartsRandNum}.
+        Sexy Dice! {actionsRandNum} on {otherplayer}'s {bodypartsRandNum}.
 
         {/* actions are grab, touch, fondle, pet, pat, bodyshot, lick, kiss, choke, nibble, caress
 
@@ -114,7 +114,7 @@ export const SwapClothing = (props: any) => {
 };
 
 const XDrinks = (props: any) => {
-    const {gender} = props
+    const { gender } = props
     return <BaseActivity>
         <Text>
             {gender} drink!
