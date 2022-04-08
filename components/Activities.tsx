@@ -62,7 +62,7 @@ export const Trivia = (props: any) => {
     
     return <BaseActivity>
     <div><h1>Trivia</h1></div>
-    Time to answer some questions. Idk we need to decide on rules. Maybe answer until you get 10 right, answer until you get one wrong?
+    Time to answer some questions. Use JetPunk or Christiana's JetPunk trivia game.
 </BaseActivity>
 }
 
