@@ -40,9 +40,8 @@ const BaseActivity = (props: any) => <Card style={{ color: 'ffffff' }}>
 export const Art = (props: any) => {
     const { players, activeplayer } = props; // todo add types
     return <BaseActivity>
-        <Text>
-            Draw something, anything! On paper, on anyone, on anything!
-        </Text>
+        <div><h1>Art</h1></div>
+        Draw something, anything! On paper, on anyone, on anything!
 
     </BaseActivity>
 };
@@ -59,7 +58,7 @@ export const SexyDice = (props: any) => {
 }
 
 export const Trivia = (props: any) => {
-    var { players, activeplayer } = props; // todo add types
+    const { players, activeplayer } = props; // todo add types
     
     return <BaseActivity>
     <div><h1>Trivia</h1></div>
@@ -71,12 +70,18 @@ export const Butler = (props: any) => {
     var { players, activeplayer } = props; // todo add types
 
     // const other = _.sample(players.splice(activeplayer, 1));
-    const otherPlayer = _.sample(players.splice(activeplayer, 1));
-    players.splice(activeplayer, 0, players[activeplayer]);
+    var otherPlayers = [];
+    for (let i = 0; i < players.length; i++){
+        if (players[i] !== players[activeplayer]){
+            otherPlayers.push(players[i])
+        }
+    }
+    // const otherPlayer = _.sample(players.splice(activeplayer, 1));
+    // players.splice(activeplayer, 0, players[activeplayer]);
 
     return <BaseActivity>
         <div><h1>Butler</h1></div>
-        Congrats, {otherPlayer}! You have a servant and their name is {players[activeplayer]}.
+        Congrats, {_.sample(otherPlayers)}! You have {players[activeplayer]} as your servant for the next round.
     </BaseActivity>
 };
 
@@ -84,7 +89,7 @@ export const Butler = (props: any) => {
 // export const BeerPong = () => <BaseActivity> does it make sense to have this one? </BaseActivity>
 
 export const Roast = (props: any) => {
-    var { players, activeplayer } = props; // todo add types
+    const { players, activeplayer } = props; // todo add types
 
     return <BaseActivity>
         <div><h1>Roast</h1></div>
@@ -94,7 +99,7 @@ export const Roast = (props: any) => {
 
 
 export const Toast = (props: any) => {
-    var { players, activeplayer } = props; // todo add types
+    const { players, activeplayer } = props; // todo add types
 
     return <BaseActivity>
         <div><h1>Toast</h1></div>
@@ -103,7 +108,7 @@ export const Toast = (props: any) => {
 }
 
 export const Dare = (props: any) => {
-    var { players, activeplayer } = props; // todo add types
+    const { players, activeplayer } = props; // todo add types
 
     return <BaseActivity>
         <div><h1>Dare</h1></div>
@@ -112,7 +117,7 @@ export const Dare = (props: any) => {
 }
 
 export const BlindGuess = (props: any) => {
-    var { players, activeplayer } = props; // todo add types
+    const { players, activeplayer } = props; // todo add types
     
     return <BaseActivity>
     <div><h1>Blind Guess</h1></div>
@@ -130,9 +135,8 @@ export const Clothing = (props: { minus: boolean }) => {
 }
 
 export const SwapClothing = (props: any) => {
-    var { players, activeplayer } = props; // todo add types
+    const { players, activeplayer } = props; // todo add types
     const otherPlayer = _.sample(players.splice(activeplayer, 1)) // remember to exclude current player
-    players = players.splice(activeplayer, 0, players[activeplayer]);
     const item = _.sample(['pant/dress/skirt/shorts', 'socks', 'shirt', 'glasses', 'underwear']);
 
     return <BaseActivity>
@@ -157,7 +161,7 @@ export const GirlsDrink = XDrinks({ gender: "Girls" })
 export const NonBinaryDrink = XDrinks({ gender: "Nonbinary people" })
 
 export const Rank = (props: any) => {
-    var { players, activeplayer } = props; // todo add types
+    const { players, activeplayer } = props; // todo add types
 
     return <BaseActivity>
         <div><h1>Rank</h1></div>
@@ -166,7 +170,7 @@ export const Rank = (props: any) => {
 }
 
 export const NeverHaveIEver = (props: any) => {
-    var { players, activeplayer } = props; // todo add types
+    const { players, activeplayer } = props; // todo add types
     
     return <BaseActivity>
         <div><h1>Never Have I Ever</h1></div>
@@ -175,7 +179,7 @@ export const NeverHaveIEver = (props: any) => {
 }
 
 export const Rant = (props: any) => {
-    var { players, activeplayer } = props; // todo add types
+    const { players, activeplayer } = props; // todo add types
 
     return <BaseActivity>
         <div><h1>Rant</h1></div>
@@ -184,7 +188,7 @@ export const Rant = (props: any) => {
 }
 
 export const Act = (props: any) => {
-    var { players, activeplayer } = props; // todo add types
+    const { players, activeplayer } = props; // todo add types
     
     return <BaseActivity>
         <div><h1>Act</h1></div>
@@ -193,7 +197,7 @@ export const Act = (props: any) => {
 }
 
 export const GiveMeTen = (props: any) => {
-    var { players, activeplayer } = props; // todo add types
+    const { players, activeplayer } = props; // todo add types
     
     return <BaseActivity>
         <div><h1>Give Me 10</h1></div>
@@ -222,7 +226,7 @@ export const Truth = (props: any) => {
 
 }
 export const Karaoke = (props: any) => {
-    var { players, activeplayer } = props; // todo add types
+    const { players, activeplayer } = props; // todo add types
     
     // fetch song and lyrics from spotify
     // can get host to login to spotify
@@ -243,7 +247,7 @@ export const TryNotToLaugh = (props: any) => {
 
 
 export const Handcuff = (props: any) => {
-    var { players, activeplayer } = props; // todo add types
+    const { players, activeplayer } = props; // todo add types
     
     return <BaseActivity>
     <div><h1>Handcuff</h1></div>

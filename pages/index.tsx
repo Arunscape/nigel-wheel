@@ -28,7 +28,7 @@ const Home: NextPage = () => {
 
   // const [activity, setActivity] = useState(Activities[0]);
   const [degree, setDegree] = useState(0);
-  const [players, setPlayers] = useState(["Nigel"]);
+  const [players, setPlayers] = useState(["Nigel", "Arun", "A", "B", "C", "D", "E"]);
   const [activeplayer, setactiveplayer] = useState(0);
 
   // for the form to add players
@@ -44,17 +44,17 @@ const Home: NextPage = () => {
       case -1:
         return <div>Spin to get started</div>
       case 0:
-        return <Activities.Art />
+        return <Activities.Art players={players} activeplayer={activeplayer}/>
       case 1:
         return <Activities.Butler players={players} activeplayer={activeplayer} />
       case 2:
-        return <Activities.Trivia />
+        return <Activities.Trivia players={players} activeplayer={activeplayer}/>
       case 3:
-        return <Activities.Toast />
+        return <Activities.Toast players={players} activeplayer={activeplayer}/>
       case 4:
-        return <Activities.Roast />
+        return <Activities.Roast players={players} activeplayer={activeplayer}/>
       case 5:
-        return <Activities.Dare />
+        return <Activities.Dare players={players} activeplayer={activeplayer}/>
       case 6:
         return <Activities.BlindGuess players={players} activeplayer={activeplayer} />
       case 7:
@@ -70,27 +70,27 @@ const Home: NextPage = () => {
       case 12:
         return <Activities.XDrinks gender="Non-binary peeps" />
       case 13:
-        return <Activities.Rank />
+        return <Activities.Rank players={players} activeplayer={activeplayer}/>
       case 14:
-        return <Activities.NeverHaveIEver />
+        return <Activities.NeverHaveIEver players={players} activeplayer={activeplayer}/>
       case 15:
-        return <Activities.Rant />
+        return <Activities.Rant players={players} activeplayer={activeplayer}/>
       case 16:
-        return <Activities.Act />
+        return <Activities.Act players={players} activeplayer={activeplayer}/>
       case 17:
-        return <Activities.GiveMeTen />
+        return <Activities.GiveMeTen players={players} activeplayer={activeplayer}/>
       case 18:
         return <Activities.Category players={players} activeplayer={activeplayer} />
       case 19:
-        return <Activities.Truth activeplayer={activeplayer} />
+        return <Activities.Truth players={players} activeplayer={activeplayer} />
       case 20:
         return <Activities.SexyDice players={players} activeplayer={activeplayer} />
       case 21:
-        return <Activities.Karaoke />
+        return <Activities.Karaoke players={players} activeplayer={activeplayer}/>
       case 22:
-        return <Activities.TryNotToLaugh />
+        return <Activities.TryNotToLaugh players={players} activeplayer={activeplayer}/>
       case 23:
-        return <Activities.Handcuff/>
+        return <Activities.Handcuff players={players} activeplayer={activeplayer}/>
       default:
         return null;
     }
