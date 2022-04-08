@@ -37,29 +37,26 @@ const BaseActivity = (props: any) => <Card style={{ color: 'ffffff' }}>
 </Card>
 
 
-export const Art = (props: ActivityProps) => {
-
-    console.log("art component: ", props.players);
+export const Art = () => {
 
     return <BaseActivity>
         <Text>
             Draw something, anything! On paper, on anyone, on anything!
         </Text>
-        {props.players}
 
     </BaseActivity>
 };
 
-export const SexyDice = () => {
-
+export const SexyDice = (props: any) => {
+    
     const actions = ["Grab", "Touch", "Fondle", "Pet", "Pat", "Bodyshot", "Lick", "Kiss", "Choke", "Nibble", "Caress", "Blow", "Eat food"];
-    const people = [""];
     const bodyparts = ["arm", "face", "lips", "shoulder", "neck", "bellybutton", "crotch", "ass", "neck", "cheek", "leg", "feet", "hair", "finger"];
-
+    const actionsRandNum = Math.floor(Math.random() * actions.length);
+    const bodypartsRandNum = Math.floor(Math.random() * bodyparts.length);
     return <BaseActivity>
         <div>uWu</div>
 
-        Sexy Dice! {actions} on {people}'s {bodyparts}.
+        Sexy Dice! {actionsRandNum} on {people}'s {bodypartsRandNum}.
 
         {/* actions are grab, touch, fondle, pet, pat, bodyshot, lick, kiss, choke, nibble, caress
 
@@ -73,10 +70,14 @@ export const Trivia = () => <BaseActivity>
     <Button>click button for a suggestion if you dont have a trivia question to ask</Button>
 </BaseActivity>
 
-export const Butler = () => {
-    // const players = useLocalStorage('players');
+export const Butler = (props: any) => {
+
+    const { players, activeplayer } = props; // todo add types
+
+    const other = _.sample(players.splice(activeplayer, 1));
+
     return <BaseActivity>
-        Until the next round, you gotta serve this person
+        Congrats, {other}! You have a servant and their name is {players[activeplayer]}
     </BaseActivity>
 };
 
@@ -101,10 +102,10 @@ export const Clothing = (props: { minus: boolean }) => {
     </BaseActivity>
 }
 
-export const SwapClothing = () => {
+export const SwapClothing = (props: any) => {
 
-    const players = [""];
-    const other = _.sample(players) // remember to exclude current player
+    const { players, activeplayer } = props;
+    const other = _.sample(players.splice(activeplayer, 1)) // remember to exclude current player
     const item = _.sample(['pant/dress/skirt/short', 'socks', 'tshirt', 'glasses']);
 
     return <BaseActivity>
@@ -112,10 +113,12 @@ export const SwapClothing = () => {
     </BaseActivity>
 };
 
-const XDrinks = (props) => {
-    const gender = "apache attack helicopter"
+const XDrinks = (props: any) => {
+    const {gender} = props
     return <BaseActivity>
-        {gender} drink!
+        <Text>
+            {gender} drink!
+        </Text>
     </BaseActivity>
 }
 
@@ -134,16 +137,16 @@ export const Act = () => <BaseActivity> Youve gotta act this out. Press button f
 export const GiveMeTen = () => <BaseActivity>Give me 10 of something pushups? Ask group for suggestion or pray to RNGesus and hit the button</BaseActivity>
 
 
-export const Category = () => {
+export const Category = (props: any) => {
 
     const category = _.sample(['operating systems']);
     const player = 'todo select player';
     return <BaseActivity>
-        {player} will go first. We go clockwise. The category is: {category}
+        {player} will select a category and go first. We go clockwise.
     </BaseActivity>
 }
 
-export const Truth = () => {
+export const Truth = (props: any) => {
 
     const player = 'todo select player';
 
@@ -157,7 +160,7 @@ export const Karaoke = () => {
     // fetch song and lyrics from spotify
     // can get host to login to spotify
     return <BaseActivity>
-        here are the lyrics. press play and go
+        Here are the lyrics. press play and go
     </BaseActivity>
 }
 
@@ -166,7 +169,7 @@ export const TryNotToLaugh = () => <BaseActivity>
 </BaseActivity>
 
 
-export const Handcuff = () => <BaseActivity>
+export const Handcuff = (props: any) => <BaseActivity>
     We gotta tie your hands until its your next turn, sorry.
 </BaseActivity>
 
@@ -176,27 +179,27 @@ export const Handcuff = () => <BaseActivity>
 export interface ActivityProps {
     players: string[];
 }
-const Activities = [
-    (props: ActivityProps) => <Art {...props} />,
-    (props: ActivityProps) => <Butler {...props} />,
-    (props: ActivityProps) => <Trivia {...props} />,
-    (props: ActivityProps) => <Toast {...props} />,
-    (props: ActivityProps) => <Roast {...props} />,
-    (props: ActivityProps) => <Dare {...props} />,
-    (props: ActivityProps) => <BlindGuess {...props} />,
-    (props: ActivityProps) => <Clothing {...props} />,
-    (props: ActivityProps) => <SwapClothing {...props} />,
-    (props: ActivityProps) => <XDrinks {...props} />,
-    (props: ActivityProps) => <Rank {...props} />,
-    (props: ActivityProps) => <NeverHaveIEver {...props} />,
-    (props: ActivityProps) => <Rant {...props} />,
-    (props: ActivityProps) => <Act {...props} />,
-    (props: ActivityProps) => <GiveMeTen {...props} />,
-    (props: ActivityProps) => <Category {...props} />,
-    (props: ActivityProps) => <Truth {...props} />,
-    (props: ActivityProps) => <SexyDice {...props} />,
-    (props: ActivityProps) => <Karaoke {...props} />,
-    (props: ActivityProps) => <TryNotToLaugh {...props} />,
-    (props: ActivityProps) => <Handcuff {...props} />,
-]
+const Activities = {
+    Art,
+    Butler,
+    Trivia,
+    Toast,
+    Roast,
+    Dare,
+    BlindGuess,
+    Clothing,
+    SwapClothing,
+    XDrinks,
+    Rank,
+    NeverHaveIEver,
+    Rant,
+    Act,
+    GiveMeTen,
+    Category,
+    Truth,
+    SexyDice,
+    Karaoke,
+    TryNotToLaugh,
+    Handcuff,
+}
 export default Activities;
