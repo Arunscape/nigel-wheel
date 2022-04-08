@@ -22,7 +22,7 @@ export const SexyDice = (props: any) => {
     
     return <BaseActivity>
         <div><h1>Sexy Dice</h1></div>
-        Sexy Dice! {actions} on {otherplayer}'s {bodyparts}! uwu
+        Sexy Dice! {actions} on {otherplayer}&apos; {bodyparts}! uwu
     </BaseActivity>
 }
 
@@ -31,7 +31,7 @@ export const Trivia = (props: any) => {
     
     return <BaseActivity>
     <div><h1>Trivia</h1></div>
-    Time to answer some questions. Use JetPunk or Christiana's JetPunk trivia game.
+    Time to answer some questions. Use JetPunk or Christiana&apos;s JetPunk trivia game.
 </BaseActivity>
 }
 
