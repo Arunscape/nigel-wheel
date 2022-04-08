@@ -56,7 +56,7 @@ const Home: NextPage = () => {
       case 5:
         return <Activities.Dare />
       case 6:
-        return <Activities.BlindGuess />
+        return <Activities.BlindGuess players={players} activeplayer={activeplayer} />
       case 7:
         return <Activities.Clothing minus={true} />
       case 8:
@@ -80,7 +80,7 @@ const Home: NextPage = () => {
       case 17:
         return <Activities.GiveMeTen />
       case 18:
-        return <Activities.Category activeplayer={activeplayer} />
+        return <Activities.Category players={players} activeplayer={activeplayer} />
       case 19:
         return <Activities.Truth activeplayer={activeplayer} />
       case 20:
@@ -90,7 +90,7 @@ const Home: NextPage = () => {
       case 22:
         return <Activities.TryNotToLaugh />
       case 23:
-        return <Activities.Handcuff players={players} />
+        return <Activities.Handcuff/>
       default:
         return null;
     }
