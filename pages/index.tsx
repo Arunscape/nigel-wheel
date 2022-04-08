@@ -12,11 +12,14 @@ import {
   Container,
   Card,
   Input,
+  Group,
+  Modal,
 } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
 import Activities from '../components/Activities';
-
+import SignInModal from "./signin";
+import { firebaseauth } from "../util/firebase";
 
 // Ability to remove a player from the list
 // Change the order of players in the list (dragging?)
@@ -25,6 +28,7 @@ import Activities from '../components/Activities';
 
 
 const Home: NextPage = () => {
+
 
   // const [activity, setActivity] = useState(Activities[0]);
   const [degree, setDegree] = useState(0);
@@ -37,6 +41,14 @@ const Home: NextPage = () => {
   const [wheel, setWheel] = useState();
   const [activity, setActivity] = useState(-1);
 
+  const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
+  useEffect(() => {
+    const unregisterAuthObserver = firebaseauth.onAuthStateChanged(user => {
+      setIsSignedIn(!!user);
+    });
+    return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
+  }, []);
+
   const ActivityFromNum = () => {
 
     console.log(activity)
@@ -44,17 +56,17 @@ const Home: NextPage = () => {
       case -1:
         return <div>Spin to get started</div>
       case 0:
-        return <Activities.Art players={players} activeplayer={activeplayer}/>
+        return <Activities.Art players={players} activeplayer={activeplayer} />
       case 1:
         return <Activities.Butler players={players} activeplayer={activeplayer} />
       case 2:
-        return <Activities.Trivia players={players} activeplayer={activeplayer}/>
+        return <Activities.Trivia players={players} activeplayer={activeplayer} />
       case 3:
-        return <Activities.Toast players={players} activeplayer={activeplayer}/>
+        return <Activities.Toast players={players} activeplayer={activeplayer} />
       case 4:
-        return <Activities.Roast players={players} activeplayer={activeplayer}/>
+        return <Activities.Roast players={players} activeplayer={activeplayer} />
       case 5:
-        return <Activities.Dare players={players} activeplayer={activeplayer}/>
+        return <Activities.Dare players={players} activeplayer={activeplayer} />
       case 6:
         return <Activities.BlindGuess players={players} activeplayer={activeplayer} />
       case 7:
@@ -70,15 +82,15 @@ const Home: NextPage = () => {
       case 12:
         return <Activities.XDrinks gender="Non-binary peeps" />
       case 13:
-        return <Activities.Rank players={players} activeplayer={activeplayer}/>
+        return <Activities.Rank players={players} activeplayer={activeplayer} />
       case 14:
-        return <Activities.NeverHaveIEver players={players} activeplayer={activeplayer}/>
+        return <Activities.NeverHaveIEver players={players} activeplayer={activeplayer} />
       case 15:
-        return <Activities.Rant players={players} activeplayer={activeplayer}/>
+        return <Activities.Rant players={players} activeplayer={activeplayer} />
       case 16:
-        return <Activities.Act players={players} activeplayer={activeplayer}/>
+        return <Activities.Act players={players} activeplayer={activeplayer} />
       case 17:
-        return <Activities.GiveMeTen players={players} activeplayer={activeplayer}/>
+        return <Activities.GiveMeTen players={players} activeplayer={activeplayer} />
       case 18:
         return <Activities.Category players={players} activeplayer={activeplayer} />
       case 19:
@@ -86,11 +98,11 @@ const Home: NextPage = () => {
       case 20:
         return <Activities.SexyDice players={players} activeplayer={activeplayer} />
       case 21:
-        return <Activities.Karaoke players={players} activeplayer={activeplayer}/>
+        return <Activities.Karaoke players={players} activeplayer={activeplayer} />
       case 22:
-        return <Activities.TryNotToLaugh players={players} activeplayer={activeplayer}/>
+        return <Activities.TryNotToLaugh players={players} activeplayer={activeplayer} />
       case 23:
-        return <Activities.Handcuff players={players} activeplayer={activeplayer}/>
+        return <Activities.Handcuff players={players} activeplayer={activeplayer} />
       default:
         return null;
     }
@@ -132,6 +144,9 @@ const Home: NextPage = () => {
       header={
         <Header height={60} p="xs">
           <div>Nigel Wheel</div>
+
+          {firebaseauth.currentUser ? <Text>{firebaseauth.currentUser?.displayName}</Text> : <Button component="a" href="/signin" >sign in</Button>}
+
         </Header>
       }
       styles={(theme) => ({

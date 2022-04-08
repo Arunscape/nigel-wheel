@@ -1,37 +1,6 @@
 import { Button, Card, Text } from "@mantine/core";
 import _ from 'lodash';
 
-// const wheel = [
-//     'art',
-//     'sexy_dice',
-//     'kiss',
-//     'jetpunk',
-//     'body_shot',
-//     'butler',
-//     'beer_pong',
-//     'roast', // take turns roasting the subject
-//     'toast', // complement circle
-//     'dare',
-//     'blind_guess',
-//     '-1_clothing',
-//     'swap_clothing',
-//     'girls_drink',
-//     'boys_drink',
-//     'nonbinary_drink',
-//     'rank',
-//     'never_have_i_ever',
-//     'rant',
-//     'act',
-//     'give_me_10', // pushups or something else
-//     'drink',
-//     'category',
-//     'truth', // hotseat
-//     '+1_clothing',
-//     'karaoke',
-//     'try_not_to_laugh',
-//     'handcuff',
-//   ];
-
 const BaseActivity = (props: any) => <Card style={{ color: 'ffffff' }}>
     {props.children}
 </Card>
