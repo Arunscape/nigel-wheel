@@ -15,6 +15,7 @@ import {
   Group,
   Modal,
   Title,
+  useMantineTheme,
 } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
@@ -50,6 +51,14 @@ const Home: NextPage = () => {
     });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
   }, []);
+
+  const nextplayer = () => {
+    const lastplayer = players.length - 1;
+    const i = activeplayer === lastplayer ? 0 : activeplayer + 1;
+    setactiveplayer(i);
+  }
+
+  const theme = useMantineTheme();
 
 
   useEffect(() => {
@@ -155,24 +164,31 @@ const Home: NextPage = () => {
           <div><h1><b>Players</b></h1></div>
 
           <div>
-            {players.map((p, i) => <Card key={i}><Title order={5}>
+            {players.map((p, i) => {
 
-              {p}
-            </Title>
-              <Button onClick={async () => {
-                const newplayers = players.filter(x => x != p);
-                console.log("removing", p)
+              return <Card key={i}><Title order={i === activeplayer ? 1 : 5}
 
-                setPlayers(newplayers);
-                if (!isSignedIn) {
-                  localStorage.setItem("players", JSON.stringify(newplayers));
-                  return;
-                }
+                style={i === activeplayer ? {
+                  backgroundColor: theme.colors.blue[5]
+              } : undefined}
+              >
+                {p}
+              </Title>
+                <Button onClick={async () => {
+                  const newplayers = players.filter(x => x != p);
+                  console.log("removing", p)
 
-                const docRef = doc(db, `/users/${firebaseauth.currentUser?.uid}`);
-                await setDoc(docRef, { players: newplayers }, { merge: true });
-              }}>Delet</Button>
-            </Card>)}
+                  setPlayers(newplayers);
+                  if (!isSignedIn) {
+                    localStorage.setItem("players", JSON.stringify(newplayers));
+                    return;
+                  }
+
+                  const docRef = doc(db, `/users/${firebaseauth.currentUser?.uid}`);
+                  await setDoc(docRef, { players: newplayers }, { merge: true });
+                }}>Delet</Button>
+              </Card>
+            })}
           </div>
 
           <Input value={playerName} onChange={(e: any) => setPlayerName(e.target.value)} />
@@ -199,15 +215,15 @@ const Home: NextPage = () => {
           >
             Add Player
           </Button>
-        </Navbar>
+        </Navbar >
       }
       header={
-        <Header height={60} p="xs">
+        < Header height={60} p="xs" >
           <div>Nigel Wheel</div>
 
           {firebaseauth.currentUser ? <Text>{firebaseauth.currentUser?.displayName}</Text> : <Button component="a" href="/signin" >sign in</Button>}
 
-        </Header>
+        </Header >
       }
       styles={(theme) => ({
         main: {
@@ -230,6 +246,7 @@ const Home: NextPage = () => {
           onClick={() => {
             // @ts-ignore
             setActivity(_.random(23))
+            nextplayer();
           }}
           variant="gradient"
           gradient={{ from: "indigo", to: "cyan", deg: degree }}
@@ -240,8 +257,9 @@ const Home: NextPage = () => {
         {ActivityFromNum && <ActivityFromNum />}
 
       </Container>
-    </AppShell>
+    </AppShell >
   );
 };
+
 
 export default Home;
