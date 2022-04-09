@@ -14,12 +14,14 @@ import {
   Input,
   Group,
   Modal,
+  Title,
 } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
 import Activities from '../components/Activities';
 import SignInModal from "./signin";
-import { firebaseauth } from "../util/firebase";
+import { firebaseauth, db } from "../util/firebase";
+import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 
 // Ability to remove a player from the list
 // Change the order of players in the list (dragging?)
@@ -32,7 +34,7 @@ const Home: NextPage = () => {
 
   // const [activity, setActivity] = useState(Activities[0]);
   const [degree, setDegree] = useState(0);
-  const [players, setPlayers] = useState(["Nigel", "Arun", "A", "B", "C", "D", "E"]);
+  const [players, setPlayers] = useState<string[]>([]);
   const [activeplayer, setactiveplayer] = useState(0);
 
   // for the form to add players
@@ -48,6 +50,34 @@ const Home: NextPage = () => {
     });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
   }, []);
+
+
+  useEffect(() => {
+
+    const x = async () => {
+      if (!isSignedIn) {
+        const p = localStorage.getItem("players");
+        if (!p)
+          return;
+        setPlayers(JSON.parse(p));
+        return;
+      }
+
+      // console.log(`/${firebaseauth.currentUser?.uid}/settings`);
+      const docRef = doc(db, `/users/${firebaseauth.currentUser?.uid}`);
+
+      const docSnap = await getDoc(docRef);
+
+      if (!docSnap.exists())
+        return;
+
+      setPlayers(docSnap.data().players);
+
+    }
+
+    x()
+
+  }, [isSignedIn])
 
   const ActivityFromNum = () => {
 
@@ -125,13 +155,43 @@ const Home: NextPage = () => {
           <div><h1><b>Players</b></h1></div>
 
           <div>
-            {players.map((p, i) => <div key={i}>{p}</div>)}
+            {players.map((p, i) => <Card key={i}><Title order={5}>
+
+              {p}
+            </Title>
+              <Button onClick={async () => {
+                const newplayers = players.filter(x => x != p);
+                console.log("removing", p)
+
+                setPlayers(newplayers);
+                if (!isSignedIn) {
+                  localStorage.setItem("players", JSON.stringify(newplayers));
+                  return;
+                }
+
+                const docRef = doc(db, `/users/${firebaseauth.currentUser?.uid}`);
+                await setDoc(docRef, { players: newplayers }, { merge: true });
+              }}>Delet</Button>
+            </Card>)}
           </div>
 
           <Input value={playerName} onChange={(e: any) => setPlayerName(e.target.value)} />
           <Button
-            onClick={() => {
-              setPlayers([...players, playerName]);
+            onClick={async () => {
+              const newplayers = [...players, playerName]
+              setPlayers(newplayers);
+
+              if (!isSignedIn) {
+                localStorage.setItem("players", JSON.stringify(newplayers));
+                setPlayerName("");
+                return;
+              }
+
+              const docRef = doc(db, `/users/${firebaseauth.currentUser?.uid}`);
+
+              await setDoc(docRef, { players: newplayers }, { merge: true });
+
+              setPlayerName("");
 
             }}
             variant="gradient"
