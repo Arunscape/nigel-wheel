@@ -5,6 +5,7 @@ const BaseActivity = (props: any) => <Card style={{ color: 'ffffff' }}>
     {props.children}
 </Card>
 
+const otherplayers = (activeplayer: number, players: string[]) => players.filter(x => x != players[activeplayer]);
 
 export const Art = (props: any) => {
     const { players, activeplayer } = props; // todo add types
@@ -16,13 +17,14 @@ export const Art = (props: any) => {
 };
 
 export const SexyDice = (props: any) => {
-    const { otherplayer } = props
+    const { players, activeplayer } = props;
+    const otherPlayer = _.sample(otherplayers(activeplayer, players))
     const actions = _.sample(["Grab", "Touch", "Fondle", "Pet", "Pat", "Bodyshot", "Lick", "Kiss", "Choke", "Nibble", "Caress", "Blow", "Eat food"]);
     const bodyparts = _.sample(["arm", "face", "lips", "shoulder", "neck", "bellybutton", "crotch", "ass", "neck", "cheek", "leg", "feet", "hair", "finger"]);
     
     return <BaseActivity>
         <div><h1>Sexy Dice</h1></div>
-        Sexy Dice! {actions} on {otherplayer}&apos; {bodyparts}! uwu
+        Sexy Dice! {actions} {otherPlayer}&apos;s {bodyparts}! uwu
     </BaseActivity>
 }
 
@@ -39,12 +41,7 @@ export const Butler = (props: any) => {
     var { players, activeplayer } = props; // todo add types
 
     // const other = _.sample(players.splice(activeplayer, 1));
-    var otherPlayers = [];
-    for (let i = 0; i < players.length; i++){
-        if (players[i] !== players[activeplayer]){
-            otherPlayers.push(players[i])
-        }
-    }
+    const otherPlayers = otherplayers(activeplayer, players);
     // const otherPlayer = _.sample(players.splice(activeplayer, 1));
     // players.splice(activeplayer, 0, players[activeplayer]);
 
@@ -72,7 +69,7 @@ export const Toast = (props: any) => {
 
     return <BaseActivity>
         <div><h1>Toast</h1></div>
-        Everyone give this lovely person a nice complement.
+        Everyone give {players[activeplayer]} a nice complement.
     </BaseActivity>
 }
 
@@ -81,7 +78,7 @@ export const Dare = (props: any) => {
 
     return <BaseActivity>
         <div><h1>Dare</h1></div>
-        As a group decide something for this person to (voluntarily) do.
+        As a group decide something for {players[activeplayer]} to (voluntarily) do.
     </BaseActivity>
 }
 
@@ -105,7 +102,7 @@ export const Clothing = (props: { minus: boolean }) => {
 
 export const SwapClothing = (props: any) => {
     const { players, activeplayer } = props; // todo add types
-    const otherPlayer = _.sample(players.splice(activeplayer, 1)) // remember to exclude current player
+    const otherPlayer = _.sample(otherplayers(activeplayer, players))
     const item = _.sample(['pant/dress/skirt/shorts', 'socks', 'shirt', 'glasses', 'underwear']);
 
     return <BaseActivity>
@@ -134,7 +131,7 @@ export const Rank = (props: any) => {
 
     return <BaseActivity>
         <div><h1>Rank</h1></div>
-        Arbitrarily rank your friends according to some arbitrary criterion. We then have to guess what youre ranking by.
+        Arbitrarily rank your friends according to some arbitrary criterion. We then have to guess what criterion {players[activeplayer]} is ranking by.
     </BaseActivity>
 }
 
@@ -152,7 +149,7 @@ export const Rant = (props: any) => {
 
     return <BaseActivity>
         <div><h1>Rant</h1></div>
-        Rant about anything youd like.
+        Rant about anything you&apos;d like, {players[activeplayer]}!
     </BaseActivity>
 }
 
@@ -161,7 +158,9 @@ export const Act = (props: any) => {
     
     return <BaseActivity>
         <div><h1>Act</h1></div>
-        Youve gotta act this out. Press button for suggestion or the group comes up with one.
+        You&apos;ve gotta act this out. Press button for suggestion or the group comes up with one.
+
+        (TODO: make button)
     </BaseActivity>
 }
 
@@ -170,7 +169,7 @@ export const GiveMeTen = (props: any) => {
     
     return <BaseActivity>
         <div><h1>Give Me 10</h1></div>
-        Give me 10 of something. Ask the group for suggestion of an action to perform.
+        {players[activeplayer]}! Give me 10 of something. Ask the group for a suggestion of an action to perform.
     </BaseActivity>
 }
 
@@ -181,7 +180,9 @@ export const Category = (props: any) => {
     const player = 'todo select player';
     return <BaseActivity>
         <div><h1>Categories</h1></div>
-        {players[activeplayer]} will select a category and go first. We go clockwise.
+        {players[activeplayer]} will select a category and go first.
+        {players[activeplayer === (players.length - 1) ? 0 : activeplayer + 1]}
+        goes second. Keep going until someone fucks up.
     </BaseActivity>
 }
 
@@ -201,7 +202,7 @@ export const Karaoke = (props: any) => {
     // can get host to login to spotify
     return <BaseActivity>
         <div><h1>Karaoke</h1></div>
-        Here are the lyrics. press play and go
+        Here are the lyrics. press play and go. JK I haven&apos;t hooked this up to spotify yet. Get someone else to pick the song.
     </BaseActivity>
 }
 
@@ -220,7 +221,7 @@ export const Handcuff = (props: any) => {
     
     return <BaseActivity>
     <div><h1>Handcuff</h1></div>
-    We gotta tie your hands until its your next turn, sorry.
+    We gotta tie your hands until its your next turn, sorry {players[activeplayer]}.
 </BaseActivity>
 }
 
