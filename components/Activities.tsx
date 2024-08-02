@@ -229,7 +229,7 @@ export const Handcuff = (props: any) => {
 export interface ActivityProps {
     players: string[];
 }
-const Activities = {
+const Activities = [
     Art,
     Butler,
     Trivia,
@@ -251,5 +251,5 @@ const Activities = {
     Karaoke,
     TryNotToLaugh,
     Handcuff,
-}
+]
 export default Activities;
