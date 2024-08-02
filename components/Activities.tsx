@@ -1,9 +1,10 @@
-import { Button, Card, Text } from "@mantine/core";
 import _ from 'lodash';
+import React from 'react';
+import { Text } from 'react-native';
 
-const BaseActivity = (props: any) => <Card style={{ color: 'ffffff' }}>
+const BaseActivity = (props: any) => <div style={{ color: 'ffffff' }}>
     {props.children}
-</Card>
+</div>
 
 const otherplayers = (activeplayer: number, players: string[]) => players.filter(x => x != players[activeplayer]);
 
@@ -21,7 +22,7 @@ export const SexyDice = (props: any) => {
     const otherPlayer = _.sample(otherplayers(activeplayer, players))
     const actions = _.sample(["Grab", "Touch", "Fondle", "Pet", "Pat", "Bodyshot", "Lick", "Kiss", "Choke", "Nibble", "Caress", "Blow", "Eat food"]);
     const bodyparts = _.sample(["arm", "face", "lips", "shoulder", "neck", "bellybutton", "crotch", "ass", "neck", "cheek", "leg", "feet", "hair", "finger"]);
-    
+
     return <BaseActivity>
         <div><h1>Sexy Dice</h1></div>
         Sexy Dice! {actions} {otherPlayer}&apos;s {bodyparts}! uwu
@@ -30,11 +31,11 @@ export const SexyDice = (props: any) => {
 
 export const Trivia = (props: any) => {
     const { players, activeplayer } = props; // todo add types
-    
+
     return <BaseActivity>
-    <div><h1>Trivia</h1></div>
-    Time to answer some questions. Use JetPunk or Christiana&apos;s JetPunk trivia game.
-</BaseActivity>
+        <div><h1>Trivia</h1></div>
+        Time to answer some questions. Use JetPunk or Christiana&apos;s JetPunk trivia game.
+    </BaseActivity>
 }
 
 export const Butler = (props: any) => {
@@ -84,9 +85,9 @@ export const Dare = (props: any) => {
 
 export const BlindGuess = (props: any) => {
     const { players, activeplayer } = props; // todo add types
-    
+
     return <BaseActivity>
-    <div><h1>Blind Guess</h1></div>
+        <div><h1>Blind Guess</h1></div>
         Blindfold {players[activeplayer]} and place things in their hands and make them guess what it is.
     </BaseActivity>
 }
@@ -113,11 +114,11 @@ export const SwapClothing = (props: any) => {
 
 const XDrinks = (props: any) => {
     const { gender } = props
-    
+
     return <BaseActivity>
         <div><h1>Drink!</h1></div>
         <Text>
-            {gender} drink!
+            {gender} {"drink!"}
         </Text>
     </BaseActivity>
 }
@@ -137,7 +138,7 @@ export const Rank = (props: any) => {
 
 export const NeverHaveIEver = (props: any) => {
     const { players, activeplayer } = props; // todo add types
-    
+
     return <BaseActivity>
         <div><h1>Never Have I Ever</h1></div>
         Play Never have I ever, 5 lives.
@@ -155,7 +156,7 @@ export const Rant = (props: any) => {
 
 export const Act = (props: any) => {
     const { players, activeplayer } = props; // todo add types
-    
+
     return <BaseActivity>
         <div><h1>Act</h1></div>
         You&apos;ve gotta act this out. Press button for suggestion or the group comes up with one.
@@ -166,7 +167,7 @@ export const Act = (props: any) => {
 
 export const GiveMeTen = (props: any) => {
     const { players, activeplayer } = props; // todo add types
-    
+
     return <BaseActivity>
         <div><h1>Give Me 10</h1></div>
         {players[activeplayer]}! Give me 10 of something. Ask the group for a suggestion of an action to perform.
@@ -197,7 +198,7 @@ export const Truth = (props: any) => {
 }
 export const Karaoke = (props: any) => {
     const { players, activeplayer } = props; // todo add types
-    
+
     // fetch song and lyrics from spotify
     // can get host to login to spotify
     return <BaseActivity>
@@ -208,7 +209,7 @@ export const Karaoke = (props: any) => {
 
 export const TryNotToLaugh = (props: any) => {
     const { players, activeplayer } = props; // todo add types
-    
+
     return <BaseActivity>
         <div><h1>Try Not to Laugh</h1></div>
         Have {players[activeplayer]} put water in ther mouth. Everyone else tries to make them laugh. You have two minutes.
@@ -217,21 +218,18 @@ export const TryNotToLaugh = (props: any) => {
 
 
 export const Handcuff = (props: any) => {
-    const { players, activeplayer } = props; // todo add types
-    
+    const { players, activeplayer } = props;
     return <BaseActivity>
-    <div><h1>Handcuff</h1></div>
-    We gotta tie your hands until its your next turn, sorry {players[activeplayer]}.
-</BaseActivity>
+        <div><h1>Handcuff</h1></div>
+        We gotta tie your hands until its your next turn, sorry {players[activeplayer]}.
+    </BaseActivity>
 }
 
-// export default Wheel;
-// 
-// 
+
 export interface ActivityProps {
     players: string[];
 }
-const Activities = {
+const Activities = [
     Art,
     Butler,
     Trivia,
@@ -253,5 +251,5 @@ const Activities = {
     Karaoke,
     TryNotToLaugh,
     Handcuff,
-}
+]
 export default Activities;
